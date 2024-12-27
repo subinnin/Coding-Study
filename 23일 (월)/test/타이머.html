@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{margin: 0; padding: 0;}
+        .timerArea{
+            width: 100px; height: 100px;
+            background-color: rgb(198, 210, 250);
+            color:  rgb(28, 35, 56);
+            line-height:  100px;
+            text-align: center;
+            font-size:30px;
+            border-radius: 50%;
+            margin: auto;
+            margin-bottom:15px;
+        }
+        .totalArea{
+            width: 315px;
+            background-color: rgb(73, 79, 99);
+            border-radius: 20px;
+            padding: 5px;
+
+        }
+        button{
+            width: 100px;
+            height: 30px;
+            border-radius: 20px;
+            border: none;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+        }
+        .startBtn {
+            background-color: rgb(231, 252, 215);
+        }
+        .stopBtn {
+            background-color: rgb(252, 217, 215);
+        }
+        .resetBtn {
+            background-color: rgb(215, 252, 246);
+        }
+    </style>
+</head>
+<body>
+    <div class="totalArea">
+        <div class="timerArea" id="timer">0</div>
+        <button class="startBtn" id="startBtn">START</button>
+        <button class="stopBtn" id="stopBtn">STOP</button>
+        <button class="resetBtn" id="resetBtn">RESET</button>
+    </div>
+    <script>
+        addEventListener('click',(e)=>{
+            const timer = document.getElementById('timer');
+            let num = 1;
+            // const timerEnd = clearInterval(timerSet)
+            switch(e.target.id){
+                case "startBtn":
+                    setInterval(()=>{
+                        timer.innerHTML = num++;
+                    },1000);
+                    break;
+                case "stopBtn":
+                    
+                    break;
+                case "resetBtn":
+                    timerEnd
+                    break;
+            }
+        })
+    </script>
+</body>
+</html>

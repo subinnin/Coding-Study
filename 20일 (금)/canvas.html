@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{ margin: 0; padding: 0;}
+        .myCanvas{
+            border:1px solid red;
+            margin: 5px;
+        }
+        .memoCanvas{
+            border: 1px solid blue;
+            margin: 5px;
+            position: relative;
+            top: -150px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" class="myCanvas" width="300" height="300"></canvas>
+    <canvas id="memoCanvas" class="memoCanvas" width="300" height="30"></canvas>
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const myPen = canvas.getContext('2d');
+        const sF = 30; //10px을 1로 볼꺼야
+        for(let i=0; i<=300; i++){
+            myPen.fillRect(150,i,1,1);
+            myPen.fillRect(i,150,1,1);
+        } 
+        
+        const plotDot = (x, y) =>{
+            myPen.fillRect(x*sF+150, 150-y*sF , 1,1);
+            
+        }
+        myPen.fillText("-5",5,140);
+        myPen.fillText("-4",35,140);
+        myPen.fillText("-3",65,140);
+        myPen.fillText("-2",95,140);
+        myPen.fillText("-1",125,140);
+        myPen.fillText("0",155,140);
+        myPen.fillText("5",305,140);
+        myPen.fillText("4",275,140);
+        myPen.fillText("3",245,140);
+        myPen.fillText("2",215,140);
+        myPen.fillText("1",185,140);
+
+
+        plotDot(1,1)
+        plotDot(3,3)
+        plotDot(-1,-1)
+        plotDot(-3,-3)
+
+        for(let i=-15; i<=15; i++){
+            for(let j=-0.2; j<=0.2; j+=0.01){
+                plotDot(i,j)
+                plotDot(j,i)
+            }
+        }
+        plotDot(-15,-0.5);
+        plotDot(-15,0.5);
+
+        const memoCanvas = document.getElementById('memoCanvas')
+        const memoPen = memoCanvas.getContext('2d')
+        
+    </script>
+</body>
+</html>

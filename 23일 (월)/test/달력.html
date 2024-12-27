@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>달력만들기</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <style>
+        *{ 
+            padding: 0; margin: 0; box-sizing: border-box;
+            font-family: "Nanum Gothic", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        
+        .settingArea{
+            /* border: 1px solid red; */
+            width: 352px;
+            padding: 5px 0 5px 50px;
+        }
+        input{
+            width: 70px;
+            height: 30px;
+            border: 2px solid #f88f6c;
+            border-radius: 20px;
+            cursor: pointer;
+            padding: 10px;
+        }
+        input::placeholder {
+            color: black;
+        }
+        .date{
+            width: 50px;
+            height: 30px;
+            border: none;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 10px;
+            display: inline-block;
+            background-color: #fdcbba;
+        }
+        .day{
+            width: 50px; height: 50px;
+            border: 1px solid #fdc0ab;
+            display: inline-block;
+            float: left;
+            box-sizing: border-box;
+            background-color: #ffe8e0;
+            border-radius: 10px;
+            padding-left: 6px;
+            padding-top: 2px;
+        }
+        .calendarArea{
+            width: 352px;
+            height: 332px;
+            /* border: 1px solid #fdcbba; */
+            border-radius: 10px;
+            margin-left: 5px;
+        }
+        button{
+            border: none;
+            width: 80px;
+            height: 30px;
+            border-radius: 20px;
+            background-color: #d38580;
+            color: white;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+        }
+        .select{
+            width: 70px;
+            height: 30px;
+            border-radius: 20px;
+            background-color: #ffd9cc;
+            border: none;
+            text-align: center;
+        }
+        .select option{
+            background-color: #ffe8e0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="settingArea">
+        <input id="inputYear" type="number" placeholder="2024">년도
+        <select id="selectValue" class="select">
+            <option value="1" selected>1월</option>
+            <option value="2">2월</option>
+            <option value="3">3월</option>
+            <option value="4">4월</option>
+            <option value="5">5월</option>
+            <option value="6">6월</option>
+            <option value="7">7월</option>
+            <option value="8">8월</option>
+            <option value="9">9월</option>
+            <option value="10">10월</option>
+            <option value="11">11월</option> 
+            <option value="12">12월</option>
+        </select>
+        <button id="showCalendar">달력보기</button>
+    </div>
+    <div class="calendarArea"></div>
+    <script>
+        class Calendar{
+            constructor(id){
+                this.id= id;
+                this.today = new Date();
+                this.selectedValue = null;
+                this.getYear = null;
+                this.getMonth = null;
+                this.getDay = null;
+                this.getDate = null;
+                this.getData = [];
+            }
+            eventSet(){
+                addEventListener('click',(e)=>{
+                    switch(e.target.id){
+                        case "showCalendar":
+                            this.year = document.getElementById('inputYear').value;
+                            const selectValue = document.getElementById('selectValue');
+                            this.selectedValue = selectValue.options[selectValue.selectedIndex].value;
+                            console.log(this.year)
+                            console.log(this.selectedValue)
+                            const today = new Date(`${this.year}/${this.selectedValue}/1`)
+                            this.getYear = today.getFullYear();
+                            this.getMonth = today.getMonth()+1;
+                            this.getDay = today.getDay();
+                            this.getDate = today.getDate();
+                            this.totalDay = 0;
+                            if(this.getMonth === 4 || this.getMonth === 6  || this.getMonth === 9 || this.getMonth === 11){
+                                this.totalDay = 30;
+                            }else if (this.getMonth === 2){
+                                if(this.getYear % 4 === 0){
+                                    this.totalDay = 29;
+                                }else{
+                                    this.totalDay = 28;
+                                }
+                            }else{
+                                this.totalDay = 31;
+                            }
+                                        this.calcCalendar();
+                                        this.makeForm();
+                                        break;
+                                }
+                            })
+                            this.getData.push([today, this.getYear, this.getMonth]);
+                            console.log(this.getData)
+            }
+            makeForm(){
+                const calendarArea = document.querySelector('.calendarArea')
+                calendarArea.innerHTML = '';
+                const dateValue = ["일","월","화","수","목","금","토"]
+                
+                dateValue.forEach((v,i)=>{
+                    calendarArea.innerHTML += `<div class="date" id="date${i}">${v}</div>`
+                })
+                const countBox = 42;
+                console.log(this.getDay)
+                if(this.getDay != 0){
+                    for(let i=0; i<this.getDay; i++){
+                        calendarArea.innerHTML += `<div class="day"></div>`
+                    }
+                }
+    
+                // console.log(this.totalDay)
+                for(let i=1; i<=this.totalDay ; i++){
+                    calendarArea.innerHTML += `<div class="day">${i}</div>`
+                }
+                for(let i=0; i<countBox-this.getDay-this.totalDay; i++){
+                    calendarArea.innerHTML += `<div class="day"></div>`
+                }
+            }
+            calcCalendar(){
+                
+            }
+        }
+        const subinCalendar = new Calendar('subinCalendar')
+        subinCalendar.eventSet()
+        
+        
+        class getData{
+            constructor(id){
+                this.id = id;
+            }
+        }
+        const calendarData = new getData('calendarData')
+        
+        
+    </script>
+</body>
+</html>

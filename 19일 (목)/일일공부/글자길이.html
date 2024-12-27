@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문자의 길이</title>
+</head>
+<body>
+    <script>
+        const myA = [ 10, 20, 30 ];
+        myA[100] = 100;
+        document.write(myA.length +"<br>");
+
+        //Rest
+        const myF = (a, b, ...c) =>{
+        }
+        document.write(myF.length +"<br>")
+
+        //Default
+        const myD = (a, b=1, c) =>{
+        }
+        document.write(myD.length +"<br>")
+        myD(10, 20, 30) //Arguments
+    </script>
+</body>
+</html>

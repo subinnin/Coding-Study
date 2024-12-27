@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{ margin : 0; padding: 0;}
+        .myCanvas{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" class="myCanvas" width="500" height="300"></canvas>
+    <script>
+        const myCanvas = document.getElementById('myCanvas')
+        const myPen = myCanvas.getContext('2d');
+        for(let i=0; i<=500; i++){
+            myPen.fillRect(i, 150, 1,1)
+        }
+        for(let i=0; i<=300; i++){
+            myPen.fillRect(250,i,1,1)
+        }
+        const modiDot = (x,y)=>{
+            myPen.fillRect(x+250,-y+150,1,1)
+        }
+        modiDot(-140,90)
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>중첩객체 destructuring</title>
+</head>
+<body>
+    <script>
+        const myZard = {
+            name : "ZARD",
+            age : 21,
+            job : 'singer',
+            album : [
+                'A1', 'A2', 'A3'
+            ],
+            hitSong : {
+                title: "hohoho",
+                song : "hahaha"
+            },
+            sing : () =>{
+                document.write('LALALALALALA')
+            }
+        }
+        const { hitSong : {song}} = myZard;
+        document.write(song +"<br>");
+
+        const { album : [ a0, , a3] } = myZard;
+        document.write( a0 , a3 +"<br>" )
+    </script>
+</body>
+</html>

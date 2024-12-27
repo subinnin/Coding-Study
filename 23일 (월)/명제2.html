@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>p, q 명제</title>
+</head>
+<body>
+    <script>
+        const p = [true, false];
+        const F = [false, false];
+        let tempA = [];
+        for(let i=0; i<p.length; i++){
+            tempA.push(p[i]&&F[i])
+        }
+        console.log(tempA)
+        for(let i=0; i<tempA.length; i++){
+            document.write((p[i]?"T":"F") + "&#x2228" + F[i] +"="+ tempA[i] +"<br>")
+        }
+    </script>
+</body>
+</html>

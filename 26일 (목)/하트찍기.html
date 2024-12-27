@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{ margin: 0; padding: 0;}
+        .imgList{
+            
+        }
+        .box {
+            width: 100px;
+            height: 200px;
+            background-image: url("zard.png");
+            background-position: 50% 50%;
+            background-size : cover;
+            display: inline-block;
+            float: left;
+        }
+        .box:nth-child(1){
+            border-radius :10px 0 0 10px;
+        }
+        .box:nth-child(3){
+            border-radius: 0 10px 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="imgList" class="imgList">
+    </div>
+    
+    <script>
+        class PicBox{
+            constructor(id, picInfo) {
+                this.id = id;
+                this.picInfo = picInfo;
+            }
+            init(targetDom){
+                let htmlString = `
+                    <div id="${this.id}" class="box"></div>
+                `;
+                
+                document.getElementById(targetDom).innerHTML += htmlString;
+                document.getElementById(`${this.id}`).style.backgroundImage = `url("${this.picInfo}")`
+            }
+     
+        }
+        const imgList = []
+        const imgPath = [
+            "https://upload.wikimedia.org/wikipedia/ko/8/8b/Sakai_Izumi.png",
+            "https://th.bing.com/th/id/OIP.3bvdSM_Cw4FSgmRkJlR_sAHaIi?w=156&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7",
+            "https://upload.wikimedia.org/wikipedia/ko/8/8b/Sakai_Izumi.png"
+        ]
+        for(let i=0; i<imgPath.length; i++){
+            imgList.push(new PicBox('img'+(i+1), imgPath[i] )) ;
+            imgList[i].init('imgList');
+        }
+        
+
+
+
+
+    </script>
+</body>
+</html>

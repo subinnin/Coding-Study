@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Foo{
+            constructor(name = '', age){
+                this._name = name;
+                this.age = age;
+            }
+            get name(){
+                return this._name;
+            }
+            get age(){
+                return this._age;
+            }
+            set age(inputV){
+                if(inputV === this._age+1){
+                    this._age = inputV;
+                }else{
+                    alert('잘못된 나이입니다.')
+                }
+                this._age = inputV;
+            }
+        }
+        const myO = new Foo('Lee', 10);
+        myO.age = 11 ;
+        document.write(myO.age)
+    </script>
+</body>
+</html>

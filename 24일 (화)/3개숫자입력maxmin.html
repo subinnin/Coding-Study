@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3개 숫자 입력받아 max, min출력하기</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <style>
+        *{ margin: 0; padding: 0;
+            font-family: "Jua", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        input {
+            width: 90px;
+            height: 30px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #9AA6B2;
+        }
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        button{
+            width: 80px;
+            height: 30px;
+            border-radius: 10px;
+            background-color: #F8FAFC;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+            border: none;
+        }
+        .totalArea{
+            width: 350px;
+            border: 3px solid #9AA6B2;
+            background-color: #BCCCDC;
+            border-radius: 20px;
+        }
+        .inputArea{
+            width: 350px;
+            text-align: center;
+            padding: 5px;
+        }
+        .buttonArea{
+            width: 350px;
+            text-align: center;
+            padding: 5px;
+        }
+        .resultArea{
+            text-align: center;
+            padding: 10px 5px;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="totalArea" id="totalArea"></div>
+    <script>
+        class Calculate{
+            constructor(id){
+                this.id = id;
+                this.vList = [];
+            }
+            init( dom ){
+                const htmlString = `
+                    <div class="inputArea">
+                        <input class="values" id="num1" type="number">
+                        <input class="values" id="num2" type="number">
+                        <input class="values" id="num3" type="number">
+                    </div>
+                    <div class="buttonArea">
+                        <button id="calcBtn">Calculate</button>
+                        
+                    </div>
+                    <div class="resultArea">
+                        <label>Max : <input type="number" id="resultMax"></label>
+                        <label>Min : <input type="number" id="resultMin"></label>
+                    </div>
+                `
+                document.getElementById(dom).innerHTML = htmlString;
+            }
+
+            eventSet(){
+                window.addEventListener('click',(e)=>{
+                    switch(e.target.id){
+                        case "calcBtn":
+                            const domList = document.getElementsByClassName("values");
+                            for(let i=0; i<domList.length; i++){
+                                this.vList.push(domList[i].value)
+                            }
+                            // console.log(this.vList)
+                            this.showResult();
+                            break;
+                    }
+                })
+            }
+            setMax(){
+                let maxV = 0;
+                maxV = Math.max(...this.vList)
+                console.log(maxV)
+                return maxV;
+            }
+            setMin(){
+                let minV = 0;
+                minV = Math.min(...this.vList)
+                console.log(minV)
+                return minV;
+            }
+            showResult(){
+                document.getElementById('resultMax').value = this.setMax();
+                document.getElementById('resultMin').value = this.setMin();
+            }
+            run( dom ){
+                this.init(dom);
+                this.eventSet();
+            }
+        }
+        //프로그램의 진입부를 알려주는 곳
+        const main = (() => {
+            const calc = new Calculate('calc');
+            calc.run('totalArea');
+        })();
+        
+    </script>
+</body>
+</html>

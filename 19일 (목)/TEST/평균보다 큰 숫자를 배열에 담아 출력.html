@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>평균보다 큰 숫자를 배열에 담아 출력</title>
+</head>
+<body>
+    <script>
+        // [ 7, 8, 10, 100, 99, 44, 23, 40, 14, 80]
+        // const numArray = [ 7, 8, 10, 100, 99, 44, 23, 40, 14, 80];
+        // let average = 0;
+        
+        // let tempA = [];
+        // for(let i=0; i<numArray.length; i++){
+        //     average += numArray[i]/numArray.length;
+            
+        // }
+        // for(let i=0; i<numArray.length; i++){
+        //     if(numArray[i]>average){
+        //         tempA.push(numArray[i]);
+        //     }
+        // }
+        
+        // document.write(average+'<br>');
+        // document.write(tempA+'<br>');
+
+        class ArrayPush{
+            constructor(id){
+                this.id = id;
+                this.average = 0;
+                this.tempA = [];
+            }
+            calcAverage(array){
+                for(let i=0; i<array.length; i++){
+                    this.average += array[i]/array.length;  
+                }
+            }
+            largerNum(array){
+                this.tempA = array.filter( number => {
+                    return this.average < number
+                })
+                this.ascendingArray();
+            }
+            ascendingArray(){
+                this.tempA.sort((a,b)=>a-b)
+            }
+            showResult(array){
+                document.write(`배열 : ${array}<br>`);
+                document.write(`평균 : ${this.average}<br>`);
+                document.write(`평균보다 큰 숫자(오름차순) : ${this.tempA}<br>`);
+            }
+            run(array){
+                this.calcAverage(array);
+                this.largerNum(array);
+                this.showResult(array);
+            }
+        }
+        const makeArray = new ArrayPush('makeArray')
+        const numArray = [ 7, 8, 10, 100, 99, 44, 23, 40, 14, 80];
+        makeArray.run(numArray);
+    </script>
+</body>
+</html>

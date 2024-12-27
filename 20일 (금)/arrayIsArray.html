@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const myZard = {
+            name : "ZARD",
+            age : 21,
+            job : 'singer',
+            album : [
+                'A1', 'A2', 'A3'
+            ],
+            hitSong : {
+                title: "hohoho",
+                song : "hahaha"
+            },
+            sing : () =>{
+                document.write('LALALALALALA')
+            }
+        }
+        
+        //  document.write(Array.isArray(myZard.hitsong))
+        
+        const doNumber = (item) =>{
+            document.write( String(item) +"<br>")
+        }
+        const doString = (item) =>{
+            document.write( item +"<br>")
+        }
+        const doArray = (item) =>{
+            for(let i=0; i<item.length; i++){
+                document.write(item +"<br>")
+            }
+        }
+        const doObject = (item) =>{
+            for(let key in item){
+                document.write( item[key] +"<br>" )
+            }
+
+        }
+        const doFunction = (item) =>{
+            item();
+        }
+        const check = (value) =>{
+            switch( typeof value ){
+                case 'number' :
+                    doNumber(value);
+                    break;
+                case 'string' :
+                    doString(value);
+                    break;
+                case 'object' :
+                    if(Array.isArray(value)){
+                        doArray(value);
+                    }else{
+                        doObject(value);
+                    }
+                    break;
+                case 'function' :
+                    doFunction(value);
+                    break;
+            }
+            
+        }
+        check(myZard)
+        // for( let key in myA ){
+        //     document.write(`${key} - ${myA[key]} <br>`)
+        // }
+        
+        
+    </script>
+</body>
+</html>

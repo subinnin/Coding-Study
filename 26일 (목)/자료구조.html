@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자료구조</title>
+</head>
+<body>
+    <script>
+        const myS = "I Love Zard";
+        let resultS ="";
+        // let resultS = '';
+        // for(let i=0; i<myS.length; i++){
+        //     resultS += myS[myS.length - i -1] ;
+        // }
+        // document.write(resultS)
+
+        class Stack{
+            constructor(id){
+                this.id = id;
+                this.storage = [];
+                
+            }
+            push( item ){
+                this.storage.push( item );
+            }
+            pop(){
+                return this.storage.pop();
+            }
+            displayStack(){
+                document.write(this.storage +"<br>");
+            }
+            getLength(){
+                return this.storage.length;
+            }
+        }
+        const stack = new Stack('stack');
+        for(let i=0; i<myS.length; i++){
+            stack.push(myS[i]);
+        }
+        
+        stack.displayStack();
+        let stackCounter = stack.getLength();
+
+        for(let i=0; i<stackCounter; i++){
+            resultS += stack.pop();
+        }
+        stack.displayStack();
+        document.write(resultS + "<br>")
+    </script>
+</body>
+</html>

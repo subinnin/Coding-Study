@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유사배열</title>
+</head>
+<body>
+    <script>
+        let myS = 'I Love Zard.';
+        let mySA = [];
+        let tempS = '';
+        mySA = [...myS]; //myS이 string이라 유사배열임. spread문법 사용 가능
+        //document.write(mySA);
+
+        // mySA.forEach((char)=>{
+        //     tempS += char;
+        // })
+        
+        document.write(...mySA);
+    </script>
+</body>
+</html>

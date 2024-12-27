@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // let result = '';
+
+        // for(let i=0; i<10; i++){
+        //     if(i%2 === 0){
+        //         result += "*";
+        //     }else{
+        //         result += "-";
+        //     }
+        // }
+        // document.write(result);
+
+        let result = [];
+
+        for(let i=0; i<10; i++){
+            if(i%2 === 0){
+                result.push(true);
+            }else{
+                result.push(false);
+            }
+        }
+        // document.write(result);
+
+        for(let i=0; i<result.length; i++){
+
+            if(result[i]){document.write("*")}
+            else{
+                document.write("-")
+            }
+            
+            // result[i] ? (document.write("*")) : (document.write("-")) - 로직의 전개용으로 사용하면 x
+        }
+    </script>
+</body>
+</html>

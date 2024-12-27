@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>중첩객체 destructuring-1</title>
+</head>
+<body>
+    <script>
+        const myZard = [
+            "zard",
+            {
+                name : {
+                    fN : "Zard",
+                    lN : "Cdr"
+                },
+                address : {
+                    location :{
+                        location1 : "Tokyo",
+                        location2 : "Ansan"
+                    }
+                },
+                song : [ "song1", "song2", "song3", "song4" ]
+            }
+        ]
+        const [, {name : {fN : myName}}] = myZard
+        document.write(myName + "<br>");
+
+        const [, {address : {location : {location2:myAddr}}}] = myZard;
+        document.write(myAddr+"<br>");
+
+        const [, {song : [ ,,,s4]}] = myZard;
+        document.write(s4 + "<br>");
+        
+        const [ , {address: {location : {location1 : [myChar,,,,]}}}] = myZard;
+        document.write(myChar + "<br>")
+
+        const [, {name: {fN : [ccc,,,]}}] = myZard;
+        document.write(ccc + "<br>")
+
+        const [, {song : [[,,,,letter],,,]}] = myZard;
+        document.write(letter +"<br>")
+    </script>
+</body>
+</html>

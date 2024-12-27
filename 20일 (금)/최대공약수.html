@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type=number id="num">
+    <button id='btn'>최대공약수</button>
+    <div id="resultArea"></div>
+    <script>
+    const btn = document.getElementById('btn')
+    btn.addEventListener('click',()=>{
+        const num = document.getElementById('num')
+        let tempA = []
+        for(let i=1; i<=num.value; i++){
+            if(num.value % i === 0){
+                tempA.push(i)
+            }
+        }
+        console.log(tempA)
+        document.getElementById('resultArea').innerHTML = tempA
+    })
+    </script>
+    </body>
+</html>

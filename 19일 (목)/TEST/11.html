@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{ margin: 0; padding: 0;}
+        input{
+            width: 20px;
+            font-size: 10px;
+        }
+        .expBox {
+            position: relative;
+            width: 9px;
+            height: 9px;
+            top: 3px;
+            left: -3px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="totalBox">
+        <input id="numBox" class="numBox"></input>
+        <input id="expBox" class="expBox"></input>
+        <button id="calcBtn">변환</button>
+        <div id="result2Num">2진수 : </div>
+        <div id="result8Num">8진수 : </div>
+        <div id="result10Num">10진수 : </div>
+        <div id="result16Num">16진수 : </div>
+    </div>
+    
+    <script>
+        class ExpCalc{
+            constructor(id) {
+                this.id = id;
+                this.num = 0;
+                this.exp = 0;
+                this.sum8 = null;
+                this.sum10 = null;
+                this.sum16 = null;
+                this.tempA = [];
+            }
+            calcSetting(){
+                document.getElementById('calcBtn').addEventListener('click', (e)=>{
+                    if(e.target.id === 'calcBtn') {
+                        
+                        this.num = document.getElementById('numBox').value;
+                        this.exp = document.getElementById('expBox').value;
+                    }
+                    switch(this.exp){
+                        case "2":
+                            for(let i=0; i<this.num.length; i++){
+                                this.sum10 += this.num[i]*2**(this.num.length-i-1)
+                            }
+                            document.getElementById('result10Num').innerHTML += this.sum10;
+
+                            for(let i=0; i<this.num.length; i++){
+                                if(this.sum10 / 8 > 8){
+                                    this.tempA.unshift(this.sum10 % 8);
+                                    this.sum10 = this.sum10/8
+                                    console.log(this.tempA)
+                                }
+                            }
+                            
+                            document.getElementById('result2Num').innerHTML += this.sum10;
+                            
+                            document.getElementById('result8Num').innerHTML += this.sum8;
+                            document.getElementById('result16Num').innerHTML += this.sum16;
+                        // case "8":
+                        //     for(let i=0; i<this.num.length; i++){
+                        //         this.sum10 += this.num[i]*8**(this.num.length-i-1)
+                        //     }
+                        //     document.getElementById('result2Num').innerHTML += this.num;
+                        //     document.getElementById('result10Num').innerHTML += this.sum10;
+                        //     document.getElementById('result8Num').innerHTML += this.sum8;
+                        //     document.getElementById('result16Num').innerHTML += this.sum16;
+                            
+                    }
+                })
+            }
+            run(){
+                this.calcSetting();
+            }
+        }
+        const expCalc = new ExpCalc('expCalc')
+        expCalc.run()
+        //30 _8 3*8 
+    </script>
+</body>
+</html>

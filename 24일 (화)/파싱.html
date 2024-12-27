@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const myO = [1, 2, 3, {a:"A"},4, 5 ];
+        for(let v of myO){
+            if(typeof v == 'object'){
+                for(let key in v){
+                    document.write(`${v[key]}<br>`)
+                }
+            }else{
+                document.write(`${v}<br>`)
+            }
+        }
+    </script>
+</body>
+</html>

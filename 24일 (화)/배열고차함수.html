@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열고차함수</title>
+</head>
+<body>
+    <script>
+        // for(let i=0; i<myA.length; i++){
+        //     document.write(myA[i]+"<br>")
+        // }
+
+        
+        const myA = [1004, 1005, 1006, 1007, 1008 ];
+        // //v : value / i : index / a : array
+        myA.forEach((v,i,a)=>{
+            document.write(`${i} / ${v} <br>`)
+        })
+        
+        let newA = [];
+        newA = myA.map((v,i,a)=>{
+            return ++v;
+        })
+        console.log(newA)
+
+        
+        let newB = [];
+    
+        newB = myA.filter((v,i,a)=>{
+            return v<1007;
+        })
+        console.log(newB)
+
+        let tempS = 'abcdefg';
+        console.log(...tempS)
+        let r = ''
+        r = tempS.split()
+        console.log(r)
+        
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>값 교환 SWAPPING</title>
+</head>
+<body>
+    <script>
+        let myV1 = 1004;
+        let myV2 = 2004;
+        let tempV = 0;
+
+        [myV2, myV1] = [myV1, myV2]
+        document.write(`${myV1} / ${myV2} <br>`)
+
+        let myA1 = [100, 200, 300, 400]
+        let myA2 = [];
+        myA2 = [...myA1];
+        document.write(`${myA1} / ${myA2}`)
+
+        let myO1 = { name :"zard", gender : "female" }
+        let myO2 = {};
+        myO2 = {...myO1}
+        console.log(myO1)
+        console.log(myO2)
+    </script>
+</body>
+</html>

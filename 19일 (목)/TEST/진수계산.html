@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{ margin: 0; padding: 0;}
+        .totalBox{
+            width:300px;
+            border: 3px solid rgb(255, 125, 125);
+            background-color: rgb(255, 191, 191);
+            border-radius: 20px;
+            padding: 5px;
+        }
+        .inputArea{
+            text-align: center;
+        }
+        .btnArea{
+            text-align: center;
+            padding: 15px;
+        }
+        button{
+            border-radius: 20px;
+            border: none;
+            width: 60px;
+            height:30px;
+            background-color: rgb(255, 240, 216);
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+        }
+        input{
+            width: 60px;
+            font-size: 25px;
+            border-radius: 20px;
+            padding-left: 5px;
+            border: 3px solid rgb(252, 171, 171);
+            background-color: rgb(255, 224, 224);
+        }
+        .expBox {
+            position: relative;
+            width: 20px;
+            height: 15px;
+            top: 3px;
+            left: -3px;
+            font-size: 16px;
+        }
+        .resultArea{
+            text-align: center;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="totalBox">
+        <div class="inputArea">
+            <input id="numBox" class="numBox"></input>
+            <input id="expBox" class="expBox"></input>
+        </div>
+        <div class="btnArea">
+            <button id="calc2Btn">2</button>
+            <button id="calc8Btn">8</button>
+            <button id="calc10Btn">10</button>
+            <button id="calc16Btn">16</button>
+        </div>
+        <div class="resultArea" id="resultArea"></div>
+        <!-- <div id="result2Num">2진수 : </div>
+        <div id="result8Num">8진수 : </div>
+        <div id="result10Num">10진수 : </div>
+        <div id="result16Num">16진수 : </div> -->
+    </div>
+    
+    <script>
+        class ExpCalc{
+            constructor(id) {
+                this.id = id;
+                this.num = 0;
+                this.exp = 0;
+                this.sum = 0;
+                this.tempS = '';
+                this.tempA = [];
+                this.tempSum = ''
+            }
+            calcSetting(){
+                window.addEventListener('click', (e)=>{
+                    if(e.target.id === 'calc2Btn' ||  e.target.id === 'calc8Btn' || e.target.id === 'calc10Btn' || e.target.id === 'calc16Btn' ) {
+                        this.num = document.getElementById('numBox').value;
+                        this.exp = document.getElementById('expBox').value;
+                    }
+                    for(let i=0; i<this.num.length; i++){
+                        this.sum += Number(this.num[i])*Number(this.exp)**(this.num.length-i-1)
+                    }
+                    switch(e.target.id){
+                        case "calc2Btn":
+                            while(this.sum / 2 > 0){
+                                this.tempS = this.sum % 2
+                                this.sum = Math.floor(this.sum / 2)
+                                this.tempA.unshift(this.tempS)
+                            }
+                            this.tempSum = '';
+                            for(let i=0; i<this.tempA.length; i++){
+                                this.tempSum += this.tempA[i]
+                            }
+                            // console.log(this.tempA)
+                            document.getElementById('resultArea').innerHTML = this.tempSum;
+
+                        case "calc8Btn":
+                            while(this.sum / 8 > 0){
+                                this.tempS = this.sum % 8
+                                this.sum = Math.floor(this.sum / 8)
+                                this.tempA.unshift(this.tempS)
+                            }
+                            this.tempSum = '';
+                            for(let i=0; i<this.tempA.length; i++){
+                                this.tempSum += this.tempA[i]
+                            }
+                            // console.log(this.tempA)
+                            document.getElementById('resultArea').innerHTML = this.tempSum;
+                        case "calc10Btn":
+                            while(this.sum / 10 > 0){
+                                this.tempS = this.sum % 10
+                                this.sum = Math.floor(this.sum / 10)
+                                this.tempA.unshift(this.tempS)
+                            }
+                            this.tempSum = '';
+                            for(let i=0; i<this.tempA.length; i++){
+                                this.tempSum += this.tempA[i]
+                            }
+                            // console.log(this.tempA)
+                            document.getElementById('resultArea').innerHTML = this.tempSum;
+                        case "calc16Btn":
+                            let deciNum16 = []
+                            
+                            for(let i=0; i<this.num.length; i++){
+                                deciNum16 += Number(this.num[i])*Number(this.exp)**(this.num.length-i-1)
+                            }
+                            while(deciNum16 / 16 > 0){
+                                this.tempS = deciNum16 % 16
+                                this.sum = Math.floor(deciNum16 / 16)
+                                this.tempA.unshift(this.tempS)
+                            }
+                            let tempSum = '';
+                            for(let i=0; i<this.tempA.length; i++){
+                                tempSum += this.tempA[i]
+                            }
+                            // console.log(this.tempA)
+                            document.getElementById('resultArea').innerHTML = tempSum;
+                    }    
+                            
+                })
+            }
+            run(){
+                this.calcSetting();
+            }
+        }
+        const expCalc = new ExpCalc('expCalc')
+        expCalc.run()
+        //30 _8 3*8 
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>p, q 명제</title>
+</head>
+<body>
+    <script>
+        const p = [true, false];
+        const T = [true, true];
+        let r = [];
+        //p || q
+
+        for(let i=0; i<p.length; i++){
+            r.push(p[i] || T[i]);
+        }
+        for(let i=0; i<r.length; i++){
+            document.write((p[i]?" T ":" F ") + "&#x2228" + (T[i]?" T ":" F ") + " = " + (r[i]?" T ":" F ") + "<br>")
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>후증가 후감소 선증가 선감소</title>
+</head>
+<body>
+    <script>
+        let myV = 1009;
+
+        document.write(++myV +"<br>") //1010
+        document.write(myV++ +"<br>") //1010
+        myV--; //1011
+        document.write(myV++ +"<br>") // 1010
+        document.write(myV++ +"<br>") //1011
+        document.write(--myV +"<br>") // 1011
+        document.write(myV-- +"<br>") // 1011
+        --myV; 
+        document.write(++myV +"<br>") //1010
+        document.write(myV-- +"<br>") //1010
+        myV++;
+        document.write(myV-- +"<br>") //1010
+        document.write(++myV +"<br>") //1010
+
+        document.write(myV +"<br>") //1011
+    </script>
+</body>
+</html>

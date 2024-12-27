@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>class 설계</title>
+</head>
+<body>
+    <script>
+        class Person {
+            constructor( name, gender, ages, bloodType ){
+                //속성
+                this.name = name;
+                this.gender = gender;
+                this.ages = ages;
+                this.bloodType = bloodType;
+            }
+            //Method
+            checkBloodType(){
+                document.write( `${this.name} : ${this.bloodType}<br>` )
+            }
+            speak(){
+                document.write( `My name is ${this.name}.<br>`)
+            }
+            run(speed){
+                document.write(`Running ${speed}km/h ...<br>`);
+            }
+        }
+        
+        const cdrP = new Person("CDR", "man", 23, "A");
+        cdrP.speak();
+        cdrP.run(15);
+        cdrP.checkBloodType();
+        const zardP = new Person("ZARD", "woman", 21 , "B");
+        zardP.speak();
+        zardP.run(20);
+        zardP.checkBloodType();
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>임의의 숫자 입력받아 팩토리얼 구하기</title>
+    <style>
+        *{ margin:0; padding:0; }
+        input {
+            width: 70px; height:30px;
+            border-radius: 20px;
+            border: none;
+            text-align: center;
+        }
+        .totalArea{
+            width: 250px;
+            height: 80px;
+            background-color: rgb(233, 233, 176);
+            margin: auto;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 20px;
+        }
+        button {
+            border-radius: 20px;
+            background-color: rgb(126, 150, 111);
+            color: white;
+            width: 70px;
+            height: 30px;
+            font-size: 12px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="totalArea">
+        <input id="num" type="number">
+        <button id="btn">Factorial</button>
+        <div id="resultArea"></div>
+    </div>
+    <script>
+        
+        const btn = document.getElementById('btn');
+        btn.addEventListener('click', ()=>{
+            const num = document.getElementById('num').value;
+            let factorial = 1;
+            for(let i=num; i>0; i--){
+                factorial *= i
+            }
+            const resultArea = document.getElementById('resultArea')
+            resultArea.innerHTML = factorial;
+        })
+    </script>
+</body>
+</html>

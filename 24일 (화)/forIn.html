@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for in 구문 - 객체 순회</title>
+</head>
+<body>
+    <script>
+        const myO = {
+            name : "zard",
+            gender : "Female",
+            address : "Tokyo"
+        }
+        for(let keyName in myO){
+            document.write(`${keyName} - ${myO[keyName]} <br>`)
+        }
+        for(let keyName of myO){
+            document.write(`${keyName}<br>`)
+        }
+        const myA = [1,2,3,4,5];
+        for(let keyName of myA){
+            document.write(`${keyName}<br>`)
+        }
+        // const myA = [1,2,3,4,5];
+        // for(let keyName in myA){
+        //     document.write(`${keyName} - ${myA[keyName]} <br>`)
+        // }
+    </script>
+</body>
+</html>

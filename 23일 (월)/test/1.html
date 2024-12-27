@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const dateInfo = new Date('2024/2/01');
+        document.write( dateInfo.getFullYear() + "<br>");
+        document.write( dateInfo.getMonth() + 1 + "<br>");
+        for(let i=1; i<=31; i++) {
+            document.write( new Date(`2024/02/${i}`).getDate() + "<br>");
+        }
+    </script>
+</body>
+</html>

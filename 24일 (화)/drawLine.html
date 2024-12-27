@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect Two Dots</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://kit.fontawesome.com/5093ba0b6a.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <style>
+        *{margin: 0; padding: 0;
+            font-family: "Jua", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="totalArea"></div>
+    <script>
+        class Canvas{
+            constructor(id){
+                this.id = id;
+                this.drawPen = null;
+                this.sF = 10;
+                this.width = 400;
+                this.height = 400;
+            }
+            init(){
+                let htmlString = '';
+                let cssString = '';
+                htmlString += `
+                    <div class="totalInputArea">
+                        <div class="inputArea">
+                            <label>DOT 1 : (<input class="input" id="x1" type="number">,<input class="input" id="y1" type="number">)</label>
+                            <label>DOT 2 : (<input class="input" id="x2" type="number">,<input class="input" id="y2" type="number">)</label>
+                            <p>
+                                <label>WIDTH : <input class="inputV" id="widthValue" type="number" value="400"></label>
+                                <label>HEIGHT : <input class="inputV" id="heightValue" type="number" value="400"></label>
+                                <label>SCALE : <input class="input" id="scaleValue" type="number"></label>
+                            </p>
+                            <button class="button" id="drawBtn">DRAW</button>
+                        </div>
+                        <div class="inputArea2">
+                            <div class="buttonArea">
+                                <div>
+                                    <button class="rectBtn" id="upBtn"><i class="fa-solid fa-caret-up"></i></button>
+                                    <button class="squareBtn" id="leftBtn"><i class="fa-solid fa-caret-left"></i></button>
+                                    <button class="squareBtn" id="resetBtn"><i class="fa-solid fa-rotate-right"></i></button>
+                                    <button class="squareBtn" id="rightBtn"><i class="fa-solid fa-caret-right"></i></button>
+                                    <button class="rectBtn" id="downBtn"><i class="fa-solid fa-caret-down"></i></button>
+                                </div>
+                                <div style="position: relative; left: 100px; top: -60px; display: flex; justify-content: space-around">
+                                    <button class="squareBtn" id="scaleUpBtn" style="background-color:rgba(255,0,0,0.4)"><i class="fa-solid fa-plus"></i></button>
+                                    <button class="squareBtn" id="scaleDownBtn" style="background-color:rgba(0,0,255,0.2)"><i class="fa-solid fa-minus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <canvas id="canvas" class="canvas" width="400" height="400"></canvas>
+                `
+                cssString += `
+                    <style>
+                        .totalInputArea{
+                            width: 700px;
+                            display: flex;
+                            margin : auto;
+                        }
+                        .inputArea{
+                            width: 400px;
+                            height: 100px;
+                            line-height: 30px;
+                            padding: 35px 0 0px 10px;
+                            font-size: 15px;
+                            background-color: #bfd9f3 ;
+                            border: 2px dashed #69a8e7;
+                            border-radius: 20px;
+                            margin: auto;
+                            margin-top: 10px;
+                            margin-bottom: 10px;
+                        }
+                        .inputArea2{
+                            width: 200px;
+                            height: 100px;
+                            line-height: 30px;
+                            padding: 15px 0 15px 10px;
+                            font-size: 15px;
+                            background-color: #bfd9f3 ;
+                            border: 2px dashed #69a8e7;
+                            border-radius: 20px;
+                            margin: auto;
+                            margin-top: 10px;
+                            margin-bottom: 10px;
+                        }
+                        .canvas {
+                            display: block;
+                            margin : 0 auto;
+                            border-radius: 10px;
+                            border: 3px solid black;
+                        }
+                        .input{
+                            width: 28px ;
+                            height:18px;
+                            border-radius: 10px;
+                            text-align: center;
+                            border: 2px solid #BCCCDC;
+                        }
+                        .inputV {
+                            width: 45px ;
+                            height:18px;
+                            border-radius: 10px;
+                            text-align: center;
+                            border: 2px solid #BCCCDC;
+                        }
+                        .button {
+                            width: 60px;
+                            height: 30px;
+                            border-radius: 20px;
+                            position: relative;
+                            background-color: #b6d0ff;
+                            border: none;
+                            font-size: 15px;
+                            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+                            top: -45px;
+                            left: 330px;
+                            cursor: pointer;
+                        }
+                        .buttonArea{
+                            width: 100px;
+                        }
+                        .rectBtn{
+                            width: 95px;
+                            height: 30px;
+                            font-size: 20px;
+                            line-height: 30px;
+                            border-radius: 10px;
+                            background-color: #F8FAFC;
+                            border: none;
+                            cursor: pointer;
+                        }
+                        .squareBtn{
+                            width: 29px;
+                            height: 29px;
+                            font-size: 20px;
+                            line-height: 30px;
+                            border-radius: 10px;
+                            background-color: #F8FAFC;
+                            border: none;
+                            cursor: pointer;
+                        }
+                        input[type="number"]::-webkit-outer-spin-button,
+                        input[type="number"]::-webkit-inner-spin-button {
+                            -webkit-appearance: none;
+                            -moz-appearance: none;
+                            appearance: none;
+                        }    
+                        i { pointer-events : none;}
+                    </style>
+                `
+                document.querySelector('.totalArea').innerHTML += htmlString + cssString;
+
+
+            }
+            settingCanvas(){
+                const canvas = document.getElementById('canvas');
+                this.drawPen = canvas.getContext('2d');
+                canvas.width = Number(document.getElementById('widthValue').value);
+                canvas.height = Number(document.getElementById('heightValue').value);
+                this.width = canvas.width;
+                this.height = canvas.height;
+            }
+            drawCrossLine(){
+                for(let i=0; i<=this.width*3; i++){
+                    
+                    this.drawPen.fillRect(this.width/2,i,1,1);
+                }
+                for(let i=0; i<=this.height*3; i++){
+                    this.drawPen.fillRect(i,this.height/2,1,1);
+                }
+                
+            }
+            modiDot(x,y){
+                this.drawPen.fillRect(x*this.sF+this.width/2,this.height/2-y*this.sF,1,1);
+            }
+            scaleFactor(){
+                console.log(this.sF)
+                for(let i=-(this.width/2); i<=this.width/2; i++){
+                    for(let j=-0.2; j<=0.2; j+=0.03){
+                        this.modiDot(i,j)
+                        this.modiDot(j,i)
+                    }
+                }
+
+                for(let i=-this.width/2; i<=this.width/2; i++){
+                    this.drawPen.fillText(-i,this.width/2-i*this.sF,this.height/2+18 );
+                    this.drawPen.fillText(i,this.width/2+10,this.height/2-i*this.sF )
+                }
+                this.drawCrossLine();
+            }
+            eventListener(){
+                addEventListener('click',(e)=>{
+                    const x1 = Number(document.getElementById('x1').value);
+                    const y1 = Number(document.getElementById('y1').value);
+                    const x2 = Number(document.getElementById('x2').value);
+                    const y2 = Number(document.getElementById('y2').value);
+                    this.sF = Number(document.getElementById('scaleValue').value);
+                    console.log(this.sF)
+                    switch(e.target.id){
+                        case "drawBtn":
+                            this.settingCanvas();
+                            this.scaleFactor();
+                            this.connectionLines(x1,y1,x2,y2)
+                            break;
+                        case "upBtn":
+                            alert("up")
+                            break;
+                        case "leftBtn":
+                            alert("left")
+                            break;
+                        case "resetBtn":
+                            alert("reset")
+                            break;
+                        case "rightBtn":
+                            alert("right")
+                            break;
+                        case "downBtn":
+                            alert("down")
+                            break;
+                        case "scaleUpBtn":
+                            this.zoomIn();
+                            break;
+                        case "scaleDownBtn":
+                            alert("zoom out");
+                            break;
+                    }
+                })
+            }
+            connectionLines(x1,y1,x2,y2){
+                if(x1<x2){
+                    for(let x=x1; x<=x2; x+=0.01){
+                        let y = (y2-y1)/(x2-x1)*(x-x1) + y1
+                        this.modiDot(x,y)
+                    }
+                }else if(x2<x1){
+                    for(let x=x2; x<=x1; x+=0.01){
+                        let y = (y2-y1)/(x2-x1)*(x-x1) + y1
+                        this.modiDot(x,y)
+                    }
+                }
+            }
+            zoomIn(){
+                this.sF = this.sF++;
+                
+                alert(this.sF)
+            }
+            zoomOut(){
+
+            }
+            run(){
+                this.init();
+                this.settingCanvas();
+                this.drawCrossLine();
+                this.eventListener();
+            }
+        }
+        const makeCanvas = new Canvas('makeCanvas');
+        makeCanvas.run();
+        makeCanvas.drawCrossLine()
+    </script>
+</body>
+</html>

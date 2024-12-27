@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>복소수의 합 / 곱</title>
+    <style>
+        *{ margin:0; padding: 0;}
+        .boxArea{
+            border: 1px solid purple;
+            width:200px;
+            padding:5px;
+            background-color: antiquewhite;
+            border-radius: 20px;
+            margin: 5px;
+        }
+        .box{
+            width: 40px; height : 30px;
+            border: 1px solid black;
+        }
+        input{
+            cursor: pointer;
+            text-align: center;
+            padding-left: 10px;
+            font-size: 20px;
+        }
+        span{
+            padding-left: 5px;
+            font-size: 20px;
+        }
+        button{
+            width: 80px;
+            height: 30px;
+            margin: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="boxArea">
+        A <input id="realNumA" type=number class="box"></input> + <input id="imaginNumA" type=number class="box"></input><span>i</span>
+    </div>
+    
+    <div class="boxArea">
+        B <input id="realNumB" type=number class="box"></input> + <input id="imaginNumB" type=number class="box"></input><span>i</span>
+    </div>
+    <div class="boxArea">
+        Result <input id="resultReal" type=number class="box"></input> + <input id="resultImagin" type=number class="box"></input><span>i</span>
+    </div>
+    <button id="sumBtn">SUM</button> <button id="multiplyBtn">MULTIPLY</button>
+    <script>
+        class Boksosu{
+            constructor(id){
+                this.id = id;
+                this.realA = 0;
+                this.realB = 0;
+                this.imaginA = 0;
+                this.imaginB = 0;
+            }
+            calcSetting(){
+                window.addEventListener('click',(e)=>{
+                    if(e.target.id == 'sumBtn' || e.target.id == 'multiplyBtn'){
+                        this.realA = Number(document.getElementById('realNumA').value);
+                        this.realB = Number(document.getElementById('realNumB').value);
+                        this.imaginA = Number(document.getElementById('imaginNumA').value);
+                        this.imaginB = Number(document.getElementById('imaginNumB').value);
+        
+                    }
+                    switch(e.target.id){
+                        case 'sumBtn':
+                            document.getElementById('resultReal').value = this.realA + this.realB;
+                            document.getElementById('resultImagin').value = this.imaginA + this.imaginB;
+                            break;
+                        case 'multiplyBtn':
+                        document.getElementById('resultReal').value = this.realA * this.realB + (-1)* this.imaginA*this.imaginB;
+                        document.getElementById('resultImagin').value = this.realB*this.imaginA + this.realA*this.imaginB;
+                    }
+
+                })
+            }
+            run(){
+                this.calcSetting();
+            }
+        }
+        const boksosu = new Boksosu('boksosu')
+        boksosu.run()
+        
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{ margin: 0; padding: 0;}
+        .totalBox{
+            width:300px;
+            border: 3px solid rgb(255, 125, 125);
+            background-color: rgb(255, 191, 191);
+            border-radius: 20px;
+            padding: 5px;
+        }
+        .inputArea{
+            text-align: center;
+        }
+        button{
+            border-radius: 20px;
+            border: none;
+            width: 60px;
+            height:30px;
+            background-color: rgb(255, 240, 216);
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+        }
+        input{
+            width: 60px;
+            font-size: 25px;
+            border-radius: 20px;
+            padding-left: 5px;
+            border: 3px solid rgb(252, 171, 171);
+            background-color: rgb(255, 224, 224);
+        }
+        .expBox {
+            position: relative;
+            width: 20px;
+            height: 15px;
+            top: 3px;
+            left: -3px;
+            font-size: 16px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="totalBox">
+        <div class="inputArea">
+            <input id="numBox" class="numBox"></input>
+            <input id="expBox" class="expBox"></input>
+            <button id="calcBtn"> 🟰 </button>
+        </div>
+        
+        <div id="result2Num">2진수 : </div>
+        <div id="result8Num">8진수 : </div>
+        <div id="result10Num">10진수 : </div>
+        <div id="result16Num">16진수 : </div>
+    </div>
+    
+    <script>
+        class ExpCalc{
+            constructor(id) {
+                this.id = id;
+                this.num = 0;
+                this.exp = 0;
+                this.sum2 = '';
+                this.sum8 = '';
+                this.sum10 = null;
+                this.sum16 = '';
+                this.tempS = '';
+                this.tempA = [];
+                this.tempB = [];
+                this.tempC = [];
+                this.tempD = [];
+                this.deciNum = 0;
+                this.deciNum2 = 0;
+                this.deciNum3 = 0;
+            }
+            calcSetting(){
+                document.getElementById('calcBtn').addEventListener('click', (e)=>{
+                    if(e.target.id === 'calcBtn') {
+                        
+                        this.num = document.getElementById('numBox').value;
+                        this.exp = document.getElementById('expBox').value;
+                    }
+                    switch(this.exp){
+                        case "2":
+                            for(let i=0; i<this.num.length; i++){
+                                this.sum10 += Number(this.num[i]*2**(this.num.length-i-1))
+                            }
+                            console.log(this.sum10)
+                            document.getElementById('result10Num').innerHTML += this.sum10;
+
+                            this.deciNum = this.sum10;
+                            
+                            while(this.deciNum / 8 > 0){
+                                this.tempS = this.deciNum % 8
+                                this.deciNum = Math.floor(this.deciNum / 8)
+                                this.tempA.unshift(this.tempS)
+                            }
+                            this.tempA.forEach((v)=>{
+                                this.sum8 += String(v)
+                            })
+                            
+                            this.deciNum2 = this.sum10;
+                            while(this.deciNum2 / 16 > 0){
+                                this.tempS = this.deciNum2 % 16
+                                this.deciNum2 = Math.floor(this.deciNum2 / 16)
+                                this.tempB.unshift(this.tempS)
+                            }
+                            console.log(this.tempB)
+                            this.tempB.forEach((v)=>{
+                                switch(v){
+                                    case 10:
+                                        v = "A"
+                                        break;
+                                    case 11:
+                                        v = "B"
+                                        break;
+                                    case 12:
+                                        v = "C"
+                                        break;
+                                    case 13:
+                                        v = "D"
+                                        break;
+                                    case 14:
+                                        v = "E"
+                                        break;
+                                    case 15:
+                                        v = "F"
+                                        break;
+                                }
+                                this.sum16 += String(v)
+                                
+                            })
+                            document.getElementById('result2Num').innerHTML += this.num;
+                            document.getElementById('result8Num').innerHTML += this.sum8;
+                            document.getElementById('result16Num').innerHTML += this.sum16;
+
+                        case "8":
+                            for(let i=0; i<this.num.length; i++){
+                                this.sum10 += this.num[i]*8**(this.num.length-i-1)
+                            }
+                            document.getElementById('result10Num').innerHTML += this.sum10;
+
+                            this.deciNum = this.sum10;
+                            console.log(this.deciNum)
+                            while(this.deciNum / 2 > 0){
+                                this.tempS = this.deciNum % 2
+                                this.deciNum = Math.floor(this.deciNum / 2)
+                                this.tempA.unshift(this.tempS)
+                            }
+                            console.log(this.tempA)
+                            this.tempA.forEach((v)=>{
+                                this.sum2 += String(v)
+                            })
+                            
+                            this.deciNum2 = this.sum10;
+                            while(this.deciNum2 / 16 > 0){
+                                this.tempS = this.deciNum2 % 16
+                                this.deciNum2 = Math.floor(this.deciNum2 / 16)
+                                this.tempB.unshift(this.tempS)
+                            }
+                            console.log(this.tempB)
+                            this.tempB.forEach((v)=>{
+                                switch(v){
+                                    case 10:
+                                        v = "A"
+                                        break;
+                                    case 11:
+                                        v = "B"
+                                        break;
+                                    case 12:
+                                        v = "C"
+                                        break;
+                                    case 13:
+                                        v = "D"
+                                        break;
+                                    case 14:
+                                        v = "E"
+                                        break;
+                                    case 15:
+                                        v = "F"
+                                        break;
+                                }
+                                this.sum16 += String(v)
+                                
+                            })
+                            document.getElementById('result2Num').innerHTML += this.sum2;
+                            document.getElementById('result8Num').innerHTML += this.num;
+                            document.getElementById('result16Num').innerHTML += this.sum16;
+                        
+                        case "10":
+                            this.sum10 = this.num
+                            document.getElementById('result10Num').innerHTML += this.sum10;
+
+                            this.deciNum = this.sum10;
+                            while(this.deciNum / 2 > 0){
+                                this.tempS = this.deciNum % 2
+                                this.deciNum = Math.floor(this.deciNum / 2)
+                                this.tempA.unshift(this.tempS)
+                            }
+                            console.log(this.tempA)
+                            this.tempA.forEach((v)=>{
+                                this.sum2 += String(v)
+                            })
+                            
+                            this.deciNum2 = this.sum10;
+                            while(this.deciNum2 / 8 > 0){
+                                this.tempS = this.deciNum2 % 8
+                                this.deciNum2 = Math.floor(this.deciNum2 / 8)
+                                this.tempB.unshift(this.tempS)
+                            }
+                            console.log(this.tempB)
+                            this.tempB.forEach((v)=>{
+                                this.sum8 += String(v)
+                            })
+
+                            this.deciNum3 = this.sum10;
+                            while(this.deciNum3 / 16 > 0){
+                                this.tempS = this.deciNum3 % 16
+                                this.deciNum3 = Math.floor(this.deciNum3 / 16)
+                                this.tempC.unshift(this.tempS)
+                            }
+                            console.log(this.tempC)
+                            this.tempC.forEach((v)=>{
+                                switch(v){
+                                    case 10:
+                                        v = "A"
+                                        break;
+                                    case 11:
+                                        v = "B"
+                                        break;
+                                    case 12:
+                                        v = "C"
+                                        break;
+                                    case 13:
+                                        v = "D"
+                                        break;
+                                    case 14:
+                                        v = "E"
+                                        break;
+                                    case 15:
+                                        v = "F"
+                                        break;
+                                }
+                                this.sum16 += String(v)
+                            })
+
+                            document.getElementById('result2Num').innerHTML += this.sum2;
+                            document.getElementById('result8Num').innerHTML += this.sum8;
+                            document.getElementById('result16Num').innerHTML += this.sum16;
+                            break;
+
+                        case "16":
+                            this.tempD = []
+                            for(let i=0; i<this.num.length; i++){
+                                this.tempD.push(this.num[i])
+                            }
+                            console.log(this.tempD)
+                            for(let i=0; i<this.tempD.length; i++){
+                                switch(this.tempD[i]){
+                                    case "A":
+                                        this.tempD[i] = 10;
+                                        break;
+                                    case "B":
+                                        this.tempD[i] = 11
+                                        break;
+                                    case "C":
+                                        this.tempD[i] = 12
+                                        break;
+                                    case "D":
+                                        this.tempD[i] = 13
+                                        break;
+                                    case "E":
+                                        this.tempD[i] = 14
+                                        break;
+                                    case "F":
+                                        this.tempD[i] = 15;
+                                        break;
+                                }
+                                this.sum10 += this.tempD[i]*16**(this.num.length-i-1)
+                            }
+                            document.getElementById('result10Num').innerHTML += this.sum10;
+
+                            this.deciNum = this.sum10;
+                            console.log(this.deciNum)
+                            while(this.deciNum / 2 > 0){
+                                this.tempS = this.deciNum % 2
+                                this.deciNum = Math.floor(this.deciNum / 2)
+                                this.tempA.unshift(this.tempS)
+                            }
+                            console.log(this.tempA)
+                            this.tempA.forEach((v)=>{
+                                this.sum2 += String(v)
+                            })
+                            
+                            this.deciNum2 = this.sum10;
+                            while(this.deciNum2 / 8 > 0){
+                                this.tempS = this.deciNum2 % 8
+                                this.deciNum2 = Math.floor(this.deciNum2 / 8)
+                                this.tempB.unshift(this.tempS)
+                            }
+                            console.log(this.tempB)
+                            this.tempB.forEach((v)=>{
+                                this.sum8 += String(v)
+                            })
+                            document.getElementById('result2Num').innerHTML += this.sum2;
+                            document.getElementById('result8Num').innerHTML += this.sum8;
+                            document.getElementById('result16Num').innerHTML += this.num;
+                    }
+                })
+            }
+            run(){
+                this.calcSetting();
+            }
+        }
+        const expCalc = new ExpCalc('expCalc')
+        expCalc.run()
+        //30 _8 3*8 
+    </script>
+</body>
+</html>

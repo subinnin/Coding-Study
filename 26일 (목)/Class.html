@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>class공부</title>
+</head>
+<body>
+    <script>
+        class Person{
+            constructor(id, name, bloodType,job){
+                this.id = id;
+                this._name = name;
+                this._bloodType = bloodType;
+                this.job = job;
+                this.values = "";
+            }
+            sing(lyrics){
+                document.write(lyrics + "<br>");
+            }
+            get name(){
+                return this._name;
+            }
+            get job(){
+                return this._job;
+            }
+            set job( selectJob ){
+                this._job = selectJob;
+            }
+            get bloodType(){
+                return this._bloodType;
+            }
+        }
+        const zard = new Person('zard','ZARD', "A",'Singer');
+        const cdr = new Person('cdr', 'CDR', "O",'Singer');
+
+        cdr.job = "teacher"; //대입할때는 setter가 작동함.
+         
+        document.write(`${zard.job}<br>`);
+        document.write(`${cdr.job}<br>`);
+        zard.sing('lalala');
+        cdr.sing('lololo')
+    </script>
+</body>
+</html>

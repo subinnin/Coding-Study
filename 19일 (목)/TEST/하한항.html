@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하한항 만들기(약분)</title>
+    <style>
+        *{ margin:0; padding: 0;}
+        .totalArea{
+            width: 200px;
+        }
+        .boxArea, .boxArea2{
+            width: 30px;
+            display: inline-block;
+        }
+        .box{
+            width: 30px; height:30px;
+            border: 1px solid black;
+            text-align: center;
+            line-height: 30px;
+        }
+        .box2 {
+            width: 30px;
+            height: 10px;
+            font-size: 30px;
+            line-height: 5px;
+            text-align: center;
+        }
+        .calcBox{
+            position: relative;
+            top: -20px;
+            left: 10px;
+        }
+        button{
+            width: 100px;
+            height: 30px;
+            font-size: 20px;
+            position: relative;
+            top: 10px;
+            left: 0px;
+        }
+        input{
+            text-align: center;
+            cursor: pointer;
+            padding-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="totalArea">
+        <div class="boxArea">
+            <input type=number class="box" id="initTop"></input>
+            <div class="box2">ㅡ</div>
+            <input type=number class="box" id="initBottom"></input>
+        </div>
+        <div class="boxArea">
+            <div class="calcBox">=</div>
+        </div>
+        <div class="boxArea boxArea2">
+            <input type=number class="box" id="resultTop"></input>
+            <div class="box2">ㅡ</div>
+            <input type=number class="box" id="resultBottom"></input>
+        </div>
+        <div id="resultArea">최대공약수 : </div>
+    </div>
+    <button id="lowestBtn">Lowest</button>
+    <script>
+        class Lowest{
+            constructor(id){
+                this.id = id;
+                this.max = 0;
+            }
+            calcSetting(){
+                const lowestBtn = document.getElementById('lowestBtn')
+                
+                lowestBtn.addEventListener('click',()=>{
+                    const initTop = document.getElementById('initTop')
+                    const initBottom = document.getElementById('initBottom')
+                    const resultTop = document.getElementById('resultTop')
+                    const resultBottom = document.getElementById('resultBottom')
+                    const resultArea = document.getElementById('resultArea')
+
+                    let tempA = [];
+                    for(let i=2; i<=initTop.value; i++){
+                        if(initTop.value%i === 0 && initBottom.value%i === 0){
+                            tempA.push(i)
+                        }
+                    }
+                    tempA.forEach((v)=>{
+                        this.max = Math.max(v);
+                    })
+
+                    //최대공약수 여부
+                    if(this.max === 0){
+                        resultTop.value = initTop.value ;
+                        resultBottom.value = initBottom.value;
+                        resultArea.innerHTML += this.max;
+                    }else{
+                        resultTop.value = initTop.value / this.max;
+                        resultBottom.value = initBottom.value / this.max;
+                        resultArea.innerHTML += this.max;
+                    }
+                    
+                })
+            }
+            run(){
+                this.calcSetting();
+            }
+        }
+        const lowest = new Lowest('lowest')
+        lowest.run()
+        
+        
+    </script>
+</body>
+</html>
